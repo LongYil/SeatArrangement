@@ -54,10 +54,7 @@ public class XiaoQuAction extends BasicAction implements ModelDriven<XiaoQu>{
 		return NONE;
 	}
 	
-	
-	
-	
-	
+
 	public XiaoQu getXq() {
 		return xq;
 	}

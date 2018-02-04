@@ -16,18 +16,10 @@
 			<result name="login">/zwbpxt.jsp</result>
 			<result name="pleaselogin">/login.jsp</result>
 		</action>
-	
-		<action name="xiaoqu_*" class="xiaoQuAction" method="{1}">
-			<result name="findall">/DRXiaoQu.jsp</result>
-			<result name="add">/zuoweibianpai.jsp</result>
-		</action>
+
 		
 		<action name="loudong_*" class="louDongAction" method="{1}">
 			<result name="findall">/DRLouDong.jsp</result>
-		</action>
-		
-		<action name="xuexiao_*" class="xuexiaoActions" method="{1}">
-			<result name="findAll">/DRXueXiao.jsp</result>
 		</action>
 		
 		<action name="keshi_*" class="keShiAction" method="{1}">
@@ -55,14 +47,24 @@
 		   <interceptors>              
 		   		<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>          
 		   </interceptors> 	
-		   <action name="keshi_*" class="keShiAction" method="{1}"> 
+		   <action name="keshi_*" class="keShiAction" method="{1}">
 				<result name="findall">/DRKeShi.jsp</result>
 				<result name="shengcheng">/UCKeShi2.jsp</result>
-				<result name="save">/DRKeShi.jsp</result> 
+				<result name="save">/DRKeShi.jsp</result>
 				<result name="bianpai">/baobiao_findAll</result>
-		        <result type="json" name="ajaxresult"><param name="root">resultinfo</param></result>  
-		        <result type="json" name="ajaxresult1"><param name="root">resultinfo1</param></result>  
+				<result type="json" name="ajaxresult"><param name="root">resultinfo</param></result>
+				<result type="json" name="ajaxresult1"><param name="root">resultinfo1</param></result>
 		   </action>
+
+			<action name="xuexiao_*" class="xuexiaoActions" method="{1}">
+				<result name="findAll">danwei.jsp</result>
+				<result type="json" name="delete"><param name="root">resultinfo</param></result>
+			</action>
+
+			<action name="xiaoqu_*" class="xiaoQuAction" method="{1}">
+				<result name="findall">/xiaoqu.jsp</result>
+				<result name="add">/zuoweibianpai.jsp</result>
+			</action>
 	</package>
 	
 	

@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="/struts-tags" prefix="s" %><!-- 引入标签库  -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 
@@ -43,57 +45,77 @@
                 </div>
                 <div class="ibox-content">
                     <div class="">
-                        <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary ">添加</a>
+                        <a onclick="addDanWei();" href="javascript:void(0)" class="btn btn-primary ">添加单位</a>
                     </div>
                     <table class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                         <tr>
-                            <th>渲染引擎</th>
-                            <th>浏览器</th>
-                            <th>平台</th>
-                            <th>引擎版本</th>
-                            <th>CSS等级</th>
-                            <th>操作</th>
+                            <th style="width: 5%">序号</th>
+                            <th style="width: 7%">学校编号</th>
+                            <th>学校名称</th>
+                            <th>学校简介</th>
+                            <th style="width: 15%">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="gradeX">
-                            <td>Trident</td>
-                            <td>Internet Explorer 4.0
-                            </td>
-                            <td>Win 95+</td>
-                            <td class="center">4</td>
-                            <td class="center">X</td>
-                            <td class="center">
-                                <a href="javascript:void(0)" class="btn btn-white btn-sm"><i class="fa fa-search"></i> 查看校区 </a>
-                                <a href="javascript:void(0)" class="btn btn-white btn-sm"><i class="fa fa-trash"></i> 删除 </a>
-                            </td>
-                        </tr>
-
+                        <s:iterator value="listxuexiao" status="stc">
+                            <tr class="gradeX">
+                                <td>${stc.index+1}</td>
+                                <td><s:property value="XXBH"/></td>
+                                <td><s:property value="XXMC"/></td>
+                                <td><s:property value="XXJC"/></td>
+                                <td>
+                                    <a onclick="viewXiaoQu('<s:property value="XXBH"/>')" href="javascript:void(0)" class="btn btn-white btn-sm"><i class="fa fa-search"></i> 查看校区 </a>
+                                    <a onclick="removeDanWei('<s:property value="XXBH"/>','<s:property value="XXMC"/>')" href="javascript:void(0)" class="btn btn-white btn-sm"><i class="fa fa-trash"></i> 删除 </a>
+                                </td>
+                            </tr>
+                        </s:iterator>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <!-- 全局js -->
 <script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
 
+<script src="js/plugins/layer/layer.min.js"></script>
+<script src="js/content.js?v=1.0.0"></script>
 <!-- Data Tables -->
 <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
 <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
-
+<script src="layui.all.js"></script>
+<script src="js/ajaxcommunicate.js"></script>
 <!-- 自定义js -->
 <script src="js/content.js?v=1.0.0"></script>
 
+<script type="text/javascript">
+    function removeDanWei(arg1,arg2) {
+        parent.layer.confirm('确定删除学校:' + arg2 + '？', {
+            btn: ['确定','取消'], //按钮
+            shade: false //不显示遮罩
+        }, function(){
+            var text = ajaxSubmit("xuexiao_delete.action",arg1);
+            if(text=="1"){
+                parent.layer.msg('删除成功', {icon: 1});
+                window.location="xuexiao_findAll.action";
+            }else{
+                parent.layer.msg('删除失败', {icon: 2});
+            }
+        }, function(){
+            parent.layer.msg('已取消', {shift: 6});
+        });
+    }
+    function viewXiaoQu(arg) {
+        window.location="xiaoqu_findAll?XXBH=" + arg;
+    }
 
+</script>
 <!-- Page-Level Scripts -->
-<script>
+<script type="text/javascript">
     $(document).ready(function () {
         $('.dataTables-example').dataTable();
 

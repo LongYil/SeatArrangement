@@ -17,6 +17,7 @@ public class XueXiaoActions extends BasicAction implements ModelDriven<XueXiao>{
 	@Autowired
 	private XueXiao xuexiao;
 	public static XueXiao yonghuxuexiao;
+	private String resultinfo;
 	private List<XueXiao> listxuexiao = new ArrayList<XueXiao>();
 	
 	@Override
@@ -37,14 +38,14 @@ public class XueXiaoActions extends BasicAction implements ModelDriven<XueXiao>{
 		}else{
 			;
 		}
-		
 		return "findAll";
 	}
 
 	public String delete(){
+		this.resultinfo = "0";
 		xxs.delete(xuexiao.getXXBH().toString());
-		listxuexiao = xxs.findAll();
-		return "findAll";
+		this.resultinfo = "1";
+		return "delete";
 	}
 	
 	
@@ -59,9 +60,13 @@ public class XueXiaoActions extends BasicAction implements ModelDriven<XueXiao>{
 	public List<XueXiao> getListxuexiao() {
 		return listxuexiao;
 	}
-
 	public void setListxuexiao(List<XueXiao> listxuexiao) {
 		this.listxuexiao = listxuexiao;
 	}
-
+	public String getResultinfo() {
+		return resultinfo;
+	}
+	public void setResultinfo(String resultinfo) {
+		this.resultinfo = resultinfo;
+	}
 }

@@ -116,19 +116,25 @@ $(function () {
         // 选项卡菜单已存在
         $('.J_menuTab').each(function () {
             if ($(this).data('id') == dataUrl) {
-                if (!$(this).hasClass('active')) {
-                    $(this).addClass('active').siblings('.J_menuTab').removeClass('active');
-                    scrollToTab(this);
-                    // 显示tab对应的内容区
-                    $('.J_mainContent .J_iframe').each(function () {
-                        if ($(this).data('id') == dataUrl) {
-                            $(this).show().siblings('.J_iframe').hide();
-                            return false;
-                        }
-                    });
-                }
-                flag = false;
-                return false;
+                $('.page-tabs-content').children("[data-id]").not(":first").each(function () {
+                    if(dataUrl == $(this).data('id')){
+                        $('.J_iframe[data-id="' + $(this).data('id') + '"]').remove();
+                        $(this).remove();
+                    }
+                });
+                // if (!$(this).hasClass('active')) {
+                //     $(this).addClass('active').siblings('.J_menuTab').removeClass('active');
+                //     scrollToTab(this);
+                //     // 显示tab对应的内容区
+                //     $('.J_mainContent .J_iframe').each(function () {
+                //         if ($(this).data('id') == dataUrl) {
+                //             $(this).show().siblings('.J_iframe').hide();
+                //             return false;
+                //         }
+                //     });
+                // }
+                flag = true;
+                // return false;
             }
         });
 
@@ -242,6 +248,7 @@ $(function () {
     //关闭其他选项卡
     function closeOtherTabs(){
         $('.page-tabs-content').children("[data-id]").not(":first").not(".active").each(function () {
+            alert($(this).data('id'));
             $('.J_iframe[data-id="' + $(this).data('id') + '"]').remove();
             $(this).remove();
         });
@@ -278,12 +285,12 @@ $(function () {
     function refreshTab() {
         var target = $('.J_iframe[data-id="' + $(this).data('id') + '"]');
         var url = target.attr('src');
-//        //显示loading提示
-//        var loading = layer.load();
-//        target.attr('src', url).load(function () {
-//            //关闭loading提示
-//            layer.close(loading);
-//        });
+       //显示loading提示
+       var loading = layer.load();
+       target.attr('src', url).load(function () {
+           //关闭loading提示
+           layer.close(loading);
+       });
     }
 
     $('.J_menuTabs').on('dblclick', '.J_menuTab', refreshTab);

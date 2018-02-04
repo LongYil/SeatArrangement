@@ -257,6 +257,25 @@
     <!-- 自定义js -->
     <script src="js/content.js?v=1.0.0"></script>
 
+    <script type="text/javascript">
+        function removeDanWei(arg1,arg2) {
+            alert("hahah");
+            parent.layer.confirm('确定删除学校:'+arg2+'？', {
+                btn: ['确定','取消'], //按钮
+                shade: false //不显示遮罩
+            }, function(){
+                var text = ajaxSubmit("exam_delete.action",arg1);
+                if(text=="1"){
+                    parent.layer.msg('删除成功', {icon: 1});
+                    window.location="exam_findAll.action";
+                }else{
+                    parent.layer.msg('删除失败', {icon: 2});
+                }
+            }, function(){
+                parent.layer.msg('已取消', {shift: 6});
+            });
+        }
+    </script>
 
     <!-- Page-Level Scripts -->
     <script>
@@ -287,9 +306,6 @@
         });
 
     </script>
-
-
-    <!--统计代码，可删除-->
 
 </body>
 
