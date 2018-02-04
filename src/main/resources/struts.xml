@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="false" />
+    
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    
+	<package name="mypackage" extends="struts-default">
+		
+		<action name="yonghu_*" class="yongHuAction" method="{1}">
+			<result name="login">/zwbpxt.jsp</result>
+			<result name="pleaselogin">/login.jsp</result>
+		</action>
+	
+		<action name="xiaoqu_*" class="xiaoQuAction" method="{1}">
+			<result name="findall">/DRXiaoQu.jsp</result>
+			<result name="add">/zuoweibianpai.jsp</result>
+		</action>
+		
+		<action name="loudong_*" class="louDongAction" method="{1}">
+			<result name="findall">/DRLouDong.jsp</result>
+		</action>
+		
+		<action name="xuexiao_*" class="xuexiaoActions" method="{1}">
+			<result name="findAll">/DRXueXiao.jsp</result>
+		</action>
+		
+		<action name="keshi_*" class="keShiAction" method="{1}">
+			<result name="findall">/DRKeShi.jsp</result>
+			<result name="shengcheng">/UCKeShi2.jsp</result>
+			<result name="save">/DRKeShi.jsp</result>
+			<result name="bianpai">/baobiao_findAll</result>
+		</action>
+		
+		<action name="kemu_*" class="keMuAction" method="{1}">
+			<result name="findall">/DRKeMu.jsp</result>
+		</action>
+		
+		<action name="baobiao_*" class="baoBiaoAction" method="{1}">
+			<result name="findall">/DRBaoBiao.jsp</result>
+		</action>
+		
+		<action name="banji_*" class="banJiAction" method="{1}">
+			<result name="findall">/DRBanJi.jsp</result>
+		</action>
+
+	</package>
+	
+	<package name="jsonaction" namespace="/"  extends="json-default">  
+		   <interceptors>              
+		   		<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>          
+		   </interceptors> 	
+		   <action name="keshi_*" class="keShiAction" method="{1}"> 
+				<result name="findall">/DRKeShi.jsp</result>
+				<result name="shengcheng">/UCKeShi2.jsp</result>
+				<result name="save">/DRKeShi.jsp</result> 
+				<result name="bianpai">/baobiao_findAll</result>
+		        <result type="json" name="ajaxresult"><param name="root">resultinfo</param></result>  
+		        <result type="json" name="ajaxresult1"><param name="root">resultinfo1</param></result>  
+		   </action>
+	</package>
+	
+	
+	
+	
+	
+	
+</struts>

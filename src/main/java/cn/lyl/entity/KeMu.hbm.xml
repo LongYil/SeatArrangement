@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.hibernate.tutorial.hbm">
+
+	<class name="cn.lyl.entity.KeMu" table="KeMu">
+		<id name="kmbh">
+			<generator class="increment"></generator>
+		</id>
+		<many-to-one name="yhu" class="cn.lyl.entity.YongHu"></many-to-one>
+		<property name="kmmc" length="100"></property>
+		<property name="kmkz1" length="100"></property>
+		<property name="kmkz2" length="100"></property>
+		<property name="kmkz3" length="100"></property>
+		<property name="kmkz4" length="100"></property>
+		<property name="kmkz5" length="100"></property>
+
+		<set name="setBanJi" inverse="true" cascade="save-update,delete" >
+			<key column="keMu"/>
+			<one-to-many class="cn.lyl.entity.BanJi"/>
+		</set>
+	</class>
+
+
+</hibernate-mapping>

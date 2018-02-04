@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.hibernate.tutorial.hbm">
+
+	<class name="cn.lyl.entity.YongHu" table="YongHu">
+		<id name="YHBH">
+			<generator class="increment"></generator>
+		</id>
+		<property name="YHMC" length="50"></property>
+		<property name="YHMM" length="50"></property>
+		<property name="YHKZ1" length="50"></property>
+		<property name="YHKZ2" length="50"></property>
+		<property name="YHKZ3" length="50"></property>
+		<property name="YHKZ4" length="50"></property>
+		<property name="YHKZ5" length="50"></property>
+		
+		<set name="setXueXiao" inverse="true" cascade="save-update,delete" >
+			<key column="yonghu"/>
+			<one-to-many class="cn.lyl.entity.XueXiao"/>
+		</set>
+		
+		<set name="setKeMu" inverse="true" cascade="save-update,delete" >
+			<key column="yhu"/>
+			<one-to-many class="cn.lyl.entity.KeMu"/>
+		</set>
+
+		<set name="setBaoBiao" inverse="true" cascade="save-update,delete" >
+			<key column="yongh"/>
+			<one-to-many class="cn.lyl.entity.BaoBiao"/>
+		</set>
+		
+		
+		
+		
+	</class>
+
+</hibernate-mapping>

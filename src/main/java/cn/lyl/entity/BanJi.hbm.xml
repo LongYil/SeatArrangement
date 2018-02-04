@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.hibernate.tutorial.hbm">
+
+	<class name="cn.lyl.entity.BanJi" table="BanJi">
+		<id name="bjbh">
+			<generator class="increment"></generator>
+		</id>
+		<many-to-one name="keMu" class="cn.lyl.entity.KeMu"></many-to-one>
+		<property name="sflb" length="10"></property>
+		<property name="bjmc1" length="50"></property>
+		<property name="bjmc2" length="50"></property>
+		<property name="bjrs1" ></property>
+		<property name="bjrs2" ></property>
+		<property name="bjks" length="10"></property>
+		<property name="bjkz1" length="50"></property>
+		<property name="bjkz2" length="50"></property>
+		<property name="bjkz3" length="50"></property>
+		<property name="bjkz4" length="50"></property>
+		<property name="bjkz5" length="50"></property>
+	</class>
+
+</hibernate-mapping>

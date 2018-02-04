@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.hibernate.tutorial.hbm">
+
+	<class name="cn.lyl.entity.XiaoQu" table="XiaoQu">
+		<id name="XQBH">
+			<generator class="increment"></generator>
+		</id>
+		<many-to-one name="xuexiao" class="cn.lyl.entity.XueXiao"></many-to-one>
+		<property name="XQMC" length="50"></property>
+		<property name="XQJC" length="50"></property>
+		<property name="XQKZ1" length="50"></property>
+		<property name="XQKZ2" length="50"></property>
+		<property name="XQKZ3" length="50"></property>
+		<property name="XQKZ4" length="50"></property>
+		<property name="XQKZ5" length="50"></property>
+			
+		<set name="setloudong" inverse="true" cascade="save-update,delete" >
+			<key column="xiaoqu"/>
+			<one-to-many class="cn.lyl.entity.LouDong"/>
+		</set>
+		
+		
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+<!-- 	配置c3p0连接池 -->
+
+		<bean id="datas" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+<!-- 		注入属性值 -->
+			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+			<property name="jdbcUrl" value="jdbc:mysql:///gxkszwbpxt?characterEncoding=UTF-8"></property>
+			<property name="user" value="root"></property>
+			<property name="password" value="root"></property>
+		</bean>
+		
+<!-- 		sessionFactory创建交给spring管理
+			配置sessionFactory创建						-->
+		<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> 
+<!-- 			因为在hibernate核心配置文件中，没有数据库配置，数据库配置在spring里面，所以需要注入数据库信息  指定数据库信息 -->
+				<property name="dataSource" ref="datas"></property>
+<!-- 			指定使用hibernate核心配置文件位置	 -->
+				<property name="configLocations" value="classpath:hibernate.cfg.xml"></property>
+		</bean>
+<!-- 		配置事务 -->
+<!-- 		第一步  配置事务管理器   注入sessionFactory -->
+		<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+<!-- 			注入sessionFactory -->
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		
+		<!-- 第二步 开始事务注解 -->
+		<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+		
+
+		<bean id="yongHu" class="cn.lyl.entity.YongHu" scope="prototype"></bean>
+		<bean id="yongHuAction" class="cn.lyl.action.YongHuAction" scope="prototype"></bean>
+		<bean id="xueXiao" class="cn.lyl.entity.XueXiao" scope="prototype"></bean>
+		<bean id="xuexiaoActions" class="cn.lyl.action.XueXiaoActions" scope="prototype"></bean>
+		<bean id="xiaoQu" class="cn.lyl.entity.XiaoQu" scope="prototype"></bean>
+		<bean id="xiaoQuAction" class="cn.lyl.action.XiaoQuAction" scope="prototype"></bean>
+		<bean id="louDong" class="cn.lyl.entity.LouDong" scope="prototype"></bean>
+		<bean id="louDongAction" class="cn.lyl.action.LouDongAction" scope="prototype"></bean>
+		<bean id="keShi" class="cn.lyl.entity.KeShi" scope="prototype"></bean>
+		<bean id="keShiAction" class="cn.lyl.action.KeShiAction" scope="prototype"></bean>
+		<bean id="zuoWei" class="cn.lyl.entity.ZuoWei" scope="prototype"></bean>
+		<bean id="banJi" class="cn.lyl.entity.BanJi" scope="prototype"></bean>
+		<bean id="banJiAction" class="cn.lyl.action.BanJiAction" scope="prototype"></bean>
+		<bean id="keMuAction" class="cn.lyl.action.KeMuAction" scope="prototype"></bean>
+		<bean id="keMu" class="cn.lyl.entity.KeMu" scope="prototype"></bean>
+		<bean id="baoBiao" class="cn.lyl.entity.BaoBiao" scope="prototype"></bean>
+		<bean id="baoBiaoAction" class="cn.lyl.action.BaoBiaoAction" scope="prototype"></bean>
+
+<!-- 		创建hibernateTemplate对象   注入sessionFactory -->
+		<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+<!-- 			注入sessionFactory -->
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+
+<!-- 	开启注解扫描 -->
+<!-- 		1 到包里面扫描类、方法、属性上面是否有注解 -->
+		<context:component-scan base-package="cn.lyl"></context:component-scan>
+<!-- 		只会扫描属性上面的注解 -->
+		<context:annotation-config></context:annotation-config>		
+</beans>
+

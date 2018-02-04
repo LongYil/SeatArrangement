@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.hibernate.tutorial.hbm">
+	<class name="cn.lyl.entity.BaoBiao" table="BaoBiao">
+		<id name="bbbh">
+			<generator class="increment"></generator>
+		</id>
+		<many-to-one name="yongh" class="cn.lyl.entity.YongHu"></many-to-one>
+		<property name="bbmc" length="100"></property>
+		<property name="bblj" length="500"></property>
+		<property name="bbkz1" length="100"></property>
+		<property name="bbkz2" length="100"></property>
+		<property name="bbkz3" length="100"></property>
+		<property name="bbkz4" length="100"></property>
+		<property name="bbkz5" length="100"></property>
+	</class>
+
+</hibernate-mapping>
